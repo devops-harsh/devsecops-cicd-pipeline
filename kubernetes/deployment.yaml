@@ -40,5 +40,5 @@ spec:
             port: 80
           initialDelaySeconds: 5
           periodSeconds: 5
-      imagePullSecrets:
+      imagePullSecrets: # image pull secret is used to pull the secret
       - name: github-container-registry

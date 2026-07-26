@@ -167,11 +167,20 @@ jobs:
 
      - name: update k8s manifest 
        run: |
-            IMAGE="${{env.IMAGE_NAME}}:sha-${{ steps.sha.outputs.short }}"
+        
+           IMAGE="${{ env.IMAGE_NAME }}:sha-${{ steps.sha.outputs.short }}"
 
-            sed -i "s|^\(\s*image:\s*\).*|\1${IMAGE}|" kubernetes/deployment.yaml
+           echo "IMAGE=$IMAGE"
 
-            echo "image is updated"
+           echo "===== BEFORE ====="
+           grep "image:" kubernetes/deployment.yaml
+
+           sed -i "s|^\(\s*image:\s*\).*|\1${IMAGE}|" kubernetes/deployment.yaml
+
+           echo "===== AFTER ====="
+           grep "image:" kubernetes/deployment.yaml
+
+           git diff kubernetes/deployment.yaml
      
      - name: commit and push 
        run: |

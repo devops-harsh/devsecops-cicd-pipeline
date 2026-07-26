@@ -187,7 +187,7 @@ jobs:
             git config --local user.email "github-actions[bot]@users.noreply.github.com"
             git config --local user.name "github-actions[bot]"
             git add kubernetes/deployment.yaml
-            git diff --quiet || git commit -m "updates the kubernetes image with tag ${{ steps.sha.outputs.short}}"
+            git commit -m "Update Kubernetes image to sha-${{ steps.sha.outputs.short }}"
             git push origin main
          
            
